@@ -4,8 +4,8 @@ import { verifyPassword } from '../../../utils/auth.util';
 import connectDatabase from '../../../utils/database.util';
 
 const config = {
+    secret: process.env.TOKEN_SECRET,
     session: {
-        secret: process.env.TOKEN_SECRET,
         jwt: true
     },
     providers: [
@@ -27,27 +27,39 @@ const config = {
                             throw new Error('Invalid Password');
                         }
 
-                        return { identifier };
+                        return { userName: user.userName, email: user.email };
                     }
 
                     user = await db.collection('users').findOne({ userName: identifier });
                     client.close();
                     if (user) {
                         user.password = await verifyPassword(password, user.password);
+
                         if (!user.password) {
                             throw new Error('Invalid Password');
                         }
-                        return { identifier };
+
+                        return { userName: user.userName, email: user.email };
                     }
 
                 } catch (err) {
-                    console.error(err);
+                    console.error(err.message);
                     client.close();
                     throw new Error(err.message || 'User not found');
                 }
             }
         })
-    ]
+    ],
+    callbacks: {
+        async session({ session, token }) {
+            session.user = token.user;
+            return session;
+        },
+        async jwt({ token, user }) {
+            if (user) token.user = user;
+            return token;
+        }
+    }
 };
 
 export default NextAuth(config);

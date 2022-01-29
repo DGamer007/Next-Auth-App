@@ -53,8 +53,6 @@ async function signup(req, res) {
           userName
         });
 
-      console.log(result);
-
       res.status(201).json({ message: 'User Created' });
       client.close();
 

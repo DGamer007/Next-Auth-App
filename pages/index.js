@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 
 function HomePage() {
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   if (status === 'loading') {
     return (
