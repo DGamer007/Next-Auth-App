@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import AuthOverlay from '../components/auth/AuthOverlay';
+import BackDrop from '../components/auth/BackDrop';
 
 const AuthContext = createContext();
 export const useAuth = function () {
@@ -12,7 +13,15 @@ export function AuthProvider({ children }) {
     return (
         <AuthContext.Provider value={[portalState, setPortalState]}>
             {children}
-            {portalState && <AuthOverlay />}
+            {
+                portalState && (
+
+                    <>
+                        <AuthOverlay />
+                        <BackDrop setPortalState={setPortalState} />
+                    </>
+                )
+            }
         </AuthContext.Provider>
     );
 }

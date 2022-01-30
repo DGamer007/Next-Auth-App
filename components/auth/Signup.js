@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { signIn } from 'next-auth/react';
 import { useAuth } from '../../contexts/AuthContext';
+import styles from '../../styles/AuthPages.module.css';
 
 function Signup() {
 
@@ -46,23 +47,43 @@ function Signup() {
             });
 
             if (!result.ok) {
-                alert(result.error);
-                return;
+                throw new Error(result.error);
             }
 
             setPortalState(false);
         } catch (err) {
-            console.error(err);
+            console.error(err.message || err);
+            alert(err.message);
         }
     }
 
     return (
-        <form onSubmit={onSubmitHandler}>
-            <input type='text' placeholder='Username' ref={userNameInputRef} required />
-            <input type='email' placeholder='Email' ref={emailInputRef} required />
-            <input type='password' placeholder='Password' ref={passwordInputRef} required />
-            <button type='submit'>Sign Up</button>
-        </form>
+        <section className={styles.container}>
+            <h1>Signup</h1>
+            <form className={styles.form} onSubmit={onSubmitHandler}>
+                <div className={styles.field}>
+                    <label htmlFor='username'>
+                        <img src='/assets/user.png' />
+                    </label>
+                    <input type='text' id='username' spellCheck='false' placeholder='Username' ref={userNameInputRef} required />
+                </div>
+                <div className={styles.field}>
+                    <label htmlFor='email'>
+                        <img src='/assets/email.png' />
+                    </label>
+                    <input type='email' id='email' spellCheck='false' placeholder='Email' ref={emailInputRef} required />
+                </div>
+                <div className={styles.field}>
+                    <label htmlFor='password'>
+                        <img src='/assets/user.png' />
+                    </label>
+                    <input type='password' id='password' spellCheck='false' placeholder='Password' ref={passwordInputRef} required />
+                </div>
+                <div className={styles.actions}>
+                    <button type='submit'>Sign Up</button>
+                </div>
+            </form>
+        </section>
     );
 }
 

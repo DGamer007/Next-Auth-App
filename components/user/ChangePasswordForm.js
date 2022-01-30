@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import styles from '../../styles/ChangePasswordForm.module.css';
 
 function ChangePasswordForm({ setChangePasswordState }) {
 
@@ -36,17 +37,23 @@ function ChangePasswordForm({ setChangePasswordState }) {
 
             setChangePasswordState(false);
         } catch (err) {
-            console.error(err.message);
+            console.error(err.message || err);
+            alert(err.message || err);
         }
     }
 
     return (
-        <section>
-            <button onClick={() => setChangePasswordState(false)}>Close</button>
-            <form onSubmit={onSubmitHandler}>
-                <input type='password' ref={newPasswordInputRef} placeholder='New Password' required />
-                <input type='password' ref={currentPasswordInputRef} placeholder='Current Password' required />
-                <button type='submit'>Change Password</button>
+        <section className={styles.container}>
+            <div className={styles.closeButton}>
+                <button onClick={() => setChangePasswordState(false)}></button>
+            </div>
+            <h1>Change Account Password</h1>
+            <form className={styles.form} onSubmit={onSubmitHandler}>
+                <input type='password' spellCheck='false' ref={newPasswordInputRef} placeholder='New Password' required />
+                <input type='password' spellCheck='false' ref={currentPasswordInputRef} placeholder='Current Password' required />
+                <div className={styles.actions}>
+                    <button type='submit'>Change Password</button>
+                </div>
             </form>
         </section>
     );

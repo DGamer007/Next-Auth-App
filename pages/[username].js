@@ -1,7 +1,9 @@
 import { getSession, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ChangePasswordForm from '../components/user/ChangePasswordForm';
+import BackDrop from '../components/auth/BackDrop';
 import connectDatabase from '../utils/database.util';
+import styles from '../styles/Home.module.css';
 
 function UserProfilePage({ userName, email, status, isOwner }) {
 
@@ -13,16 +15,20 @@ function UserProfilePage({ userName, email, status, isOwner }) {
     }
 
     return (
-        <main>
+        <main className={styles.main}>
             <h1>{userName}</h1>
-            <p>{email}</p>
+            <h3>{email}</h3>
             {
                 isOwner && (
                     <>
-                        <p>Private Repository 1</p>
-                        <button onClick={() => setChangePasswordState(true)}>Change Account Password</button>
+                        <button className={styles.button} onClick={() => setChangePasswordState(true)}>Change Account Password</button>
                         {
-                            changePasswordState && <ChangePasswordForm setChangePasswordState={setChangePasswordState} />
+                            changePasswordState && (
+                                <>
+                                    <ChangePasswordForm setChangePasswordState={setChangePasswordState} />
+                                    <BackDrop setPortalState={setChangePasswordState} />
+                                </>
+                            )
                         }
                     </>
                 )

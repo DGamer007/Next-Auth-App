@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
+import HomePage from '../components/pages/HomePage';
+import LandingPage from '../components/pages/LandingPage';
 
-function HomePage() {
+function Home() {
 
   const { status } = useSession();
 
@@ -12,9 +14,9 @@ function HomePage() {
 
   return (
     <>
-      {status === 'authenticated' ? <h1>HomePage</h1> : <h1>Landing Page</h1>}
+      {status === 'authenticated' ? <HomePage /> : <LandingPage />}
     </>
   );
 }
 
-export default HomePage;
+export default Home;

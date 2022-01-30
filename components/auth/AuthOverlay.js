@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import Login from './Login';
 import Signup from './Signup';
+import styles from '../../styles/AuthOverlay.module.css';
 
 function AuthOverlay() {
 
@@ -15,16 +16,18 @@ function AuthOverlay() {
     }
 
     return createPortal((
-        <section>
-            <button onClick={() => setPortalState(false)}>Close</button>
+        <section className={styles.container}>
+            <div className={styles.closeButton}>
+                <button onClick={() => setPortalState(false)}></button>
+            </div>
             {
                 authState === 'login' ? <Login /> : <Signup />
             }
-            <button onClick={toggleAuth}>
+            <a onClick={toggleAuth}>
                 {
-                    authState === 'login' ? 'Create a new Account' : 'Already have an Account ?'
+                    authState === 'login' ? 'Create new Account' : 'Already have an Account ?'
                 }
-            </button>
+            </a>
         </section>
     ), document.getElementById('authentication'));
 }

@@ -1,6 +1,7 @@
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
+import styles from '../../styles/Navbar.module.css';
 
 function Navbar() {
 
@@ -19,29 +20,36 @@ function Navbar() {
     }
 
     return (
-        <nav>
-            <ul>
-                <li>
-                    <Link href='/'>Home</Link>
-                </li>
-                {
-                    status !== 'loading' && (
-                        <li>
-                            {
-                                status === 'authenticated' ? (
-                                    <button onClick={logoutHandler}>Logout</button>
-                                ) : (
-                                    <button onClick={loginHandler}>Login</button>
-                                )
-                            }
-                        </li>
-                    )
-                }
+        <header className={styles.header}>
+            <Link href="/">
+                <a>
+                    <div className={styles.logo}>{'DGamer\' NextAuth'}</div>
+                </a>
+            </Link>
+            <nav>
+                <ul>
+                    {
+                        status === 'authenticated' && (
+                            <li><Link href={`/${session.user.userName}`}>Profile</Link></li>
+                        )
+                    }
+                    {
+                        status !== 'loading' && (
+                            <li>
+                                {
+                                    status === 'authenticated' ? (
+                                        <a onClick={logoutHandler}>Logout</a>
+                                    ) : (
+                                        <a onClick={loginHandler}>Login</a>
+                                    )
+                                }
+                            </li>
+                        )
+                    }
+                </ul>
 
-                {status === 'authenticated' && <li><Link href={`/${session.user.userName}`}>Profile</Link></li>}
-            </ul>
-
-        </nav>
+            </nav>
+        </header>
     );
 }
 

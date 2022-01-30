@@ -1,0 +1,47 @@
+.container {
+    z-index: 10;
+    position: fixed;
+    top: 20vh;
+    left: 36vw;
+    margin: var(--size-8) auto;
+    border-radius: 6px;
+    background-color: var(--color-grey-100);
+    width: 30%;
+    max-width: 50rem;
+    padding: var(--size-4);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    font-size: var(--size-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container a {
+    font-size: var(--size-4);
+    cursor: pointer;
+    color: var(--color-grey-900);
+}
+
+.container a:hover {
+    text-decoration: 1px underline dashed black;
+}
+
+.closeButton {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.closeButton button {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    height: var(--size-4);
+    width: var(--size-4);
+    background-color: var(--color-error-500);
+}
+
+.closeButton button:hover {
+    background-color: var(--color-error-100);
+    border-color: var(--color-error-100);
+}
