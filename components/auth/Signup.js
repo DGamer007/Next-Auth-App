@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/AuthPages.module.css';
@@ -63,19 +64,19 @@ function Signup() {
             <form className={styles.form} onSubmit={onSubmitHandler}>
                 <div className={styles.field}>
                     <label htmlFor='username'>
-                        <img src='/assets/user.png' />
+                        <Image src='/assets/user.png' width='24' height='24' />
                     </label>
                     <input type='text' id='username' spellCheck='false' placeholder='Username' ref={userNameInputRef} required />
                 </div>
                 <div className={styles.field}>
                     <label htmlFor='email'>
-                        <img src='/assets/email.png' />
+                        <Image src='/assets/email.png' width='24' height='24' />
                     </label>
                     <input type='email' id='email' spellCheck='false' placeholder='Email' ref={emailInputRef} required />
                 </div>
                 <div className={styles.field}>
                     <label htmlFor='password'>
-                        <img src='/assets/user.png' />
+                        <Image src='/assets/key.png' width='24' height='24' />
                     </label>
                     <input type='password' id='password' spellCheck='false' placeholder='Password' ref={passwordInputRef} required />
                 </div>

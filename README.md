@@ -8,7 +8,7 @@ This is a Basic NextJS-NextAuth Application. Typically Users can authenticate th
 
 I have deployed this Project on [Vercel](https://vercel.com)
 
-[Click here]() to visit **DGamer' NextAuth**
+[Click here](https://next-auth-app-wine.vercel.app) to visit **DGamer' NextAuth**
 
 <br>
 <br>
