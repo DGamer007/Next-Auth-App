@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 
 async function connectDatabase() {
     try {
-        const client = await MongoClient.connect('mongodb://localhost:27017/auth-app');
+        const client = await MongoClient.connect(process.env.MONGODB_DATABASE_URL);
         return client;
 
     } catch (err) {
